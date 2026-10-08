@@ -427,7 +427,7 @@ namespace Assistant
             ScriptManager.GetGumpInfo(param);
         }
 
-        private static void GetItemHue(string[] param)
+        internal static void GetItemHue(string[] param)
         {
             Targeting.OneTimeTarget(OnGetItemHueTarget);
             Client.Instance.SendToClient(new UnicodeMessage(0xFFFFFFFF, -1, MessageType.Regular, 0x3B2, 3,

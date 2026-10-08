@@ -71,6 +71,10 @@ namespace Assistant.Scripts
             // Hotkey execution
             Interpreter.RegisterCommandHandler("hotkey", Hotkey); //HotKeyAction
 
+            // Client inspection
+            Interpreter.RegisterCommandHandler("info", Info);
+            Interpreter.RegisterCommandHandler("hue", Hue);
+
             
 
             Interpreter.RegisterCommandHandler("overhead", OverheadMessage); //OverheadMessageAction
@@ -783,6 +787,20 @@ namespace Assistant.Scripts
             }
 
             hk.Callback();
+
+            return true;
+        }
+
+        private static bool Info(string command, Variable[] vars, bool quiet, bool force)
+        {
+            ScriptManager.GetGumpInfo(Array.Empty<string>());
+
+            return true;
+        }
+
+        private static bool Hue(string command, Variable[] vars, bool quiet, bool force)
+        {
+            Assistant.Commands.GetItemHue(Array.Empty<string>());
 
             return true;
         }
