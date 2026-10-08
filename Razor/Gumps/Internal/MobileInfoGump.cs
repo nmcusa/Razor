@@ -91,6 +91,22 @@ namespace Assistant.Gumps.Internal
             sb.AppendLine($"Blessed: {mobile.Blessed}");
 
             AddHtml(124, 223, 211, 88, sb.ToString(), true, true);
+
+            WriteJournalEvents();
+        }
+
+        private void WriteJournalEvents()
+        {
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE NAME {_mobile.Name}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE SERIAL {_mobile.Serial}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE HUE {_mobile.Hue}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE BODY {_mobile.Body}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE POSITION {_mobile.Position}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE NOTORIETY {_mobile.Notoriety}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE IS_GHOST {_mobile.IsGhost}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE IS_HUMAN {_mobile.IsHuman}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE IS_MONSTER {_mobile.IsMonster}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP MOBILE BLESSED {_mobile.Blessed}", false);
         }
 
         public override void OnResponse(int buttonId, int[] switches, GumpTextEntry[] textEntries = null)

@@ -74,6 +74,15 @@ namespace Assistant.Gumps.Internal
             else
                 AddTextEntry(219, 188, 116, 20, item.Hue, (int)ItemInfoButtons.Hue, $"{item.Hue}");
 
+            WriteJournalEvents();
+        }
+
+        private void WriteJournalEvents()
+        {
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP ITEM NAME {_item.ItemID.ItemData.Name}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP ITEM SERIAL {_item.Serial}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP ITEM ID {_item.ItemID.Value}", false);
+            World.Player.SendMessage(MsgLevel.Force, $"RAZOR_INFO_GUMP ITEM HUE {_item.Hue}", false);
         }
 
         public override void OnResponse(int buttonId, int[] switches, GumpTextEntry[] textEntries = null)
