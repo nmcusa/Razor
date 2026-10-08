@@ -1,6 +1,7 @@
 name: Build Dev Preview
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -36,7 +37,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Restore Razor
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration /p:RestorePackagesConfig=true
       env:
         Configuration: ${{ matrix.configuration }}
         
@@ -65,8 +66,17 @@ jobs:
         cd bin/x64/Release/
         7z a -tzip "Razor-dev-x64-preview.zip" "*"
 
+    - name: Upload Razor build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Razor-outlands-info-journal
+        path: |
+          bin/Win32/Release/Razor-dev-x86-preview.zip
+          bin/x64/Release/Razor-dev-x64-preview.zip
+
     - name: Delete Dev Release
       uses: dev-drprasad/delete-tag-and-release@v0.2.0
+      continue-on-error: true
       with:
         delete_release: true
         tag_name: Razor-dev-preview
@@ -82,4 +92,3 @@ jobs:
         prerelease: true
         tag: Razor-dev-preview
         token: ${{ secrets.GITHUB_TOKEN }}
-
